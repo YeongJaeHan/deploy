@@ -27,22 +27,31 @@ deploy
 - 중간에 y, git 로그인등등이 나올 수 있다
 - 브라우저 가동
 - 13.125.245.21에 접속
-- 접속로그 확인 (리눅스에서 진행)
-- $ tail -f /var/apache2/access.log
-
+- 접속로그 확인 (리눅스에서 진행)(/home/ubuntu인 상태)
+- $ tail -f /var/log/apache2/access.log
+- 모니터링 하다가
+- 빠져나가기 => ctrl+c
+- 에러로그
+- $ tail -f /var/log/apache2/error.log
 # 이후작업
 - 코드수정
 - git 최신반영
 - 서버 업데이트
  $ fab deploy
 
- # 잘 안된다
- - 소스코드상에 파일명, 설정값등 오타가 없어야 함
- - git에 최종 소스가 모두 반영되어야 함
- - 리눅스에서 기존의 흔적을 모두 제거한다
-   현재위치 : /home/ubuntu
-   프로젝트 삭제 : $ rm -r -f deploy //project name에 적어둔거 적어줘야함
-   가상환경 삭제 : $ ls -a //숨김파일 확인 .virtualenvs가 파란색 글씨로 적혀 있음 이게 숨겨져있다는 뜻
+# 잘 안된다
+- 소스코드상에 파일명, 설정값등 오타가 없어야 함
+- git에 최종 소스가 모두 반영되어야 함
+- 리눅스에서 기존의 흔적을 모두 제거한다
+  현재위치 : /home/ubuntu
+  프로젝트 삭제 : $ rm -r -f deploy //project name에 적어둔거 적어줘야함
+  가상환경 삭제 : $ ls -a //숨김파일 확인 .virtualenvs가 파란색 글씨로 적혀 있음 이게 숨겨져있다는 뜻
                   $ rm -r -f .virtualenvs
 - 로컬 PC
   $ fab new_server
+
+# 가상 호스트가 설정된 부분
+- deploy는 프로젝트명(deploy.json)
+- /etc/apache2/sites-available/deploy.conf
+- 파일 읽기
+  $ cat /etc/apache2/sites-available/{}.conf
